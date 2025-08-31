@@ -1,5 +1,6 @@
 package com.cristian.dream_shops.service.product;
 
+import com.cristian.dream_shops.dto.ProductDto;
 import com.cristian.dream_shops.model.Product;
 import com.cristian.dream_shops.request.AddProductRequest;
 import com.cristian.dream_shops.request.UpdateProductRequest;
@@ -18,4 +19,8 @@ public interface IProductService {
     List<Product> getProductsByName(String name);
     List<Product> getProductsByBrandAndName(String brand, String name);
     Long countProductsByBrandAndName(String brand, String name);
+
+    List<ProductDto> getConvertedProducts(List<Product> products);
+
+    ProductDto convertToDto(Product product);
 }
