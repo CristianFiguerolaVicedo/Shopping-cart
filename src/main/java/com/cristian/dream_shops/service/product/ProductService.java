@@ -1,6 +1,5 @@
 package com.cristian.dream_shops.service.product;
 
-import com.cristian.dream_shops.exceptions.ProductNotFoundException;
 import com.cristian.dream_shops.exceptions.ResourceNotFoundException;
 import com.cristian.dream_shops.model.Category;
 import com.cristian.dream_shops.model.Product;
