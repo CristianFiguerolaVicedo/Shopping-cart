@@ -156,4 +156,21 @@ public class ProductController {
                     .body(new APIResponse("error", e.getMessage()));
         }
     }
+
+    @GetMapping(path = "/product/count/by-brand/and-name")
+    public ResponseEntity<APIResponse> countProductsByBrandAndName(
+            @RequestParam String brand,
+            @RequestParam String name
+    ) {
+        try {
+            var productCount = productService.countProductsByBrandAndName(brand, name);
+            if (productCount == 0) {
+                return ResponseEntity.status(NOT_FOUND)
+                        .body(new APIResponse("No product found", null));
+            }
+            return ResponseEntity.ok(new APIResponse("Success", productCount));
+        } catch (Exception e) {
+            return ResponseEntity.ok(new APIResponse(e.getMessage(), null));
+        }
+    }
 }
