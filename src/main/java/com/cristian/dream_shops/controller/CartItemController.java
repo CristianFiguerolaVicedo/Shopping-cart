@@ -1,8 +1,10 @@
 package com.cristian.dream_shops.controller;
 
 import com.cristian.dream_shops.exceptions.ResourceNotFoundException;
+import com.cristian.dream_shops.repository.CartItemRepository;
 import com.cristian.dream_shops.response.APIResponse;
 import com.cristian.dream_shops.service.cart.ICartItemService;
+import com.cristian.dream_shops.service.cart.ICartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,14 +16,19 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 @RequiredArgsConstructor
 public class CartItemController {
     private final ICartItemService cartItemService;
+    private final ICartService cartService;
 
     @PostMapping(path = "/item/add")
     public ResponseEntity<APIResponse> addItemToCart(
-            @RequestParam Long cartId,
+            @RequestParam(required = false) Long cartId,
             @RequestParam Long productId,
             @RequestParam Integer quantity
     ) {
         try {
+            if (cartId == null) {
+                cartId = cartService.initializeNewCart();
+            }
+
             cartItemService.addItemToCart(cartId, productId, quantity);
             return ResponseEntity.ok(new APIResponse("Item added to cart successfully", null));
         } catch (ResourceNotFoundException e) {
