@@ -37,7 +37,7 @@ public class CartItemController {
         }
     }
 
-    @DeleteMapping(path = "/{cartId}/item/{productId}/remove")
+    @DeleteMapping(path = "/cart/{cartId}/item/{productId}/remove")
     public ResponseEntity<APIResponse> removeItemFromCart(
             @PathVariable Long cartId,
             @PathVariable Long productId

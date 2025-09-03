@@ -4,6 +4,7 @@ import com.cristian.dream_shops.exceptions.ResourceNotFoundException;
 import com.cristian.dream_shops.model.Cart;
 import com.cristian.dream_shops.repository.CartItemRepository;
 import com.cristian.dream_shops.repository.CartRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,7 @@ public class CartService implements ICartService{
                 .orElseThrow(() -> new ResourceNotFoundException("Cart not found"));
     }
 
+    @Transactional
     @Override
     public void clearCart(Long id) {
         Cart cart = getCart(id);
@@ -42,5 +44,10 @@ public class CartService implements ICartService{
     public Long initializeNewCart() {
         Cart newCart = new Cart();
         return cartRepository.save(newCart).getId();
+    }
+
+    @Override
+    public Cart getCartByUserId(Long userId) {
+        return cartRepository.findByUserId(userId);
     }
 }
