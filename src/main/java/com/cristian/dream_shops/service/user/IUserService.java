@@ -1,5 +1,6 @@
 package com.cristian.dream_shops.service.user;
 
+import com.cristian.dream_shops.dto.UserDto;
 import com.cristian.dream_shops.model.User;
 import com.cristian.dream_shops.request.CreateUserRequest;
 import com.cristian.dream_shops.request.UpdateUserRequest;
@@ -9,4 +10,5 @@ public interface IUserService {
     User createUser(CreateUserRequest request);
     User updateUser(Long id, UpdateUserRequest request);
     void deleteUser(Long id);
+    UserDto convertToDto(User user);
 }

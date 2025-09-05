@@ -1,5 +1,6 @@
 package com.cristian.dream_shops.controller;
 
+import com.cristian.dream_shops.dto.UserDto;
 import com.cristian.dream_shops.exceptions.AlreadyExistsException;
 import com.cristian.dream_shops.exceptions.ResourceNotFoundException;
 import com.cristian.dream_shops.model.User;
@@ -23,7 +24,8 @@ public class UserController {
     public ResponseEntity<APIResponse> getUserById(@PathVariable Long id) {
         try {
             User user = userService.getUserById(id);
-            return ResponseEntity.ok(new APIResponse("Success", user));
+            UserDto userDto = userService.convertToDto(user);
+            return ResponseEntity.ok(new APIResponse("Success", userDto));
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(NOT_FOUND)
                     .body(new APIResponse(e.getMessage(), null));
@@ -34,7 +36,8 @@ public class UserController {
     public ResponseEntity<APIResponse> createUser(@RequestBody CreateUserRequest request) {
         try {
             User user = userService.createUser(request);
-            return ResponseEntity.ok(new APIResponse("Success", user));
+            UserDto userDto = userService.convertToDto(user);
+            return ResponseEntity.ok(new APIResponse("Success", userDto));
         } catch (AlreadyExistsException e) {
             return ResponseEntity.status(CONFLICT)
                     .body(new APIResponse(e.getMessage(), null));
@@ -48,7 +51,8 @@ public class UserController {
     ) {
         try {
             User user = userService.updateUser(id, request);
-            return ResponseEntity.ok(new APIResponse("Success", user));
+            UserDto userDto = userService.convertToDto(user);
+            return ResponseEntity.ok(new APIResponse("Success", userDto));
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(NOT_FOUND)
                     .body(new APIResponse(e.getMessage(), null));
