@@ -7,6 +7,7 @@ import com.cristian.dream_shops.model.User;
 import com.cristian.dream_shops.repository.UserRepository;
 import com.cristian.dream_shops.request.CreateUserRequest;
 import com.cristian.dream_shops.request.UpdateUserRequest;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.Authentication;
