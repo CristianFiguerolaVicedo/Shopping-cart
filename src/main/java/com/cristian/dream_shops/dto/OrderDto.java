@@ -12,7 +12,7 @@ import java.util.List;
 public class OrderDto {
     private Long id;
     private Long userId;
-    private LocalDateTime orderDate;
+    private LocalDate orderDate;
     private BigDecimal totalAmount;
     private String status;
     private List<OrderItemDto> orderItems;
